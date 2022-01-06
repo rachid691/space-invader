@@ -1,4 +1,43 @@
 
+from  tkinter import *
+import math,random
+from random import randint,randrange
+
+
+
+def clavier(event):
+    global PosX,PosY
+    touche= event.keysym
+    if touche =='s':
+        if PosX>30:
+            PosX -= 10
+    if touche =='d':
+        if PosX<520:
+            PosX += 20
+    Canevas.coords(vaisseau,PosX -10, PosY -10, PosX+10, PosY +10)
+
+Mafenetre = Tk()
+Mafenetre.title('Space Invader')
+
+PosX=275
+PosY=520
+
+LARGEUR = 550
+HAUTEUR = 550
+RAYON=15
+X=LARGEUR/2
+Y=HAUTEUR/2
+vitesse=5
+angle=random.uniform(0,2*math.pi)
+DX=vitesse*math.cos(angle)
+DY=vitesse*math.sin(angle)
+Canevas = Canvas(Mafenetre, width=LARGEUR, height=HAUTEUR, bg='white')
+Alien=Canevas.create_oval(X-RAYON,Y-RAYON,X+RAYON,Y+RAYON,width=1,outline="red",fill='blue')
+Alien_2=Canevas.create_oval(X-RAYON+5,Y-RAYON+5,X+RAYON+5,Y+RAYON+5,width=1,outline="red",fill='blue')
+vaisseau= Canevas.create_rectangle(PosX -10, PosY -10, PosX+10, PosY +10, width=5, outline='black', fill='red')
+
+Canevas.focus_set()
+Canevas.bind('<Key>',clavier)
 Canevas.pack(padx=5,pady=5)
 
 #Affichage résultat
