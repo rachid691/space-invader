@@ -270,14 +270,7 @@ class Jeu:#Classe permettant de gérer le canvas,la fenêtre de jeu et le bon fo
         self.highscore_SV.set('RECORD : '+self.temp.readline())
         self.temp.close()
         self.highscore_disp = self.canvas.create_window(490,15,window = self.highscore_label)
- 
-    def round_screen(self): # Ecran de transition entre deux manches
-        self.round += 1
-        self.round_SV.set('ROUND '+ str(self.round))
-        self.round_label = tk.Label(self.canvas, textvariable=self.round_SV, fg='#FFE213', bg='black', font='Helvetica 60 bold')
-        self.round_display = self.canvas.create_window(300,250,window = self.round_label)
-        self.canvas.after(1000,self.new_round)  #lancement de la prochaine manche
-
+        
     def new_round(self):
         self.canvas.delete(self.round_display)
         
@@ -291,8 +284,14 @@ class Jeu:#Classe permettant de gérer le canvas,la fenêtre de jeu et le bon fo
         self.transition = False
         self.canvas.after(16, self.horde.mouvements)
         self.canvas.after(16, self.horde.new_shot)
-        self.canvas.after(16, self.shots_management)
-   
+        self.canvas.after(16, self.shots_management)    
+ 
+    def screen_round(self): # Ecran de transition entre deux manches
+        self.round += 1
+        self.round_SV.set('ROUND '+ str(self.round))
+        self.round_label = tk.Label(self.canvas, textvariable=self.round_SV, fg='#FFE213', bg='black', font='Helvetica 60 bold')
+        self.round_display = self.canvas.create_window(300,250,window = self.round_label)
+        self.canvas.after(1000,self.new_round)  #lancement de la prochaine manche
  
     def end_game(self): # Ecran de game over
         self.canvas.delete('all')
@@ -380,7 +379,7 @@ class Jeu:#Classe permettant de gérer le canvas,la fenêtre de jeu et le bon fo
             if len(self.horde.aliens_list) == 0:
                 self.transition = True
             if len(self.horde.aliens_list) == 0 and len(self.current_shots) == 0:
-                self.canvas.after(1000, self.round_screen) # on lance la prochaine manche
+                self.canvas.after(1000, self.screen_round) # on lance la prochaine manche
                 return
         self.canvas.after(16, self.shots_management)
        
