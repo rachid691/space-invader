@@ -28,5 +28,5 @@ Pour coder ce jeu j ai utilisé 8 classes:
 -la classe "Menu" qui crée usn objet ayant pour attributs tous les éléments du menu(ligne 175)
 -la classe "Jeu" permettant de gérer le canvas,la fenêtre de jeu et le bon fonctionnement de celui-ci.(ligne 183)
 
-répertoire git: "https://github.com/rachid691/space-invader"
+répertoire git: "https://github.com/rachid691/space-invader.git"
 
